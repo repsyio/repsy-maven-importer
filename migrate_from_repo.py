@@ -32,7 +32,7 @@ if maven_repo_username != '':
 
 repsy_headers = {'Authorization': 'Basic ' + basic_auth(repsy_repo_username, repsy_repo_password)}
 
-def upload_repsy(path: str):
+def upload_to_repsy(path: str):
     response = requests.get(maven_repo_link + path, headers = maven_headers)
     requests.put(repsy_repo_link + path, data = response.content, headers = repsy_headers)
 
@@ -50,7 +50,7 @@ def walk(path: str):
                 walk(path + child_path)
             else:
                 print('uploading ' + path + child_path)
-                upload_repsy(path + child_path)
+                upload_to_repsy(path + child_path)
 
 
 walk('')
